@@ -29,6 +29,7 @@ public class BankAccountTest {
         }
     }
 
+<<<<<<< HEAD
     public void testCloseEmptyAccount() {
         BankAccount emptyAccount = new BankAccount();
         emptyAccount.closeAccount();
@@ -43,6 +44,16 @@ public class BankAccountTest {
     }
 
 
+=======
+    @Test
+    public void testWithdraw(){
+        BankAccount testAccount = new BankAccount();
+        testAccount.deposit(100);
+        testAccount.withdraw(20);
+        assertEquals(80, testAccount.getBalance(), 0.01);
+    }
+
+>>>>>>> ddc3e5f1f93e193ca487d409864ac085d885bb2f
     @Test 
     public void testCreateAdditionalAccount() {
         MainMenu testMenu = new MainMenu();
