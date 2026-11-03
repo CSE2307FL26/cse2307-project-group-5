@@ -26,4 +26,13 @@ public class BankAccountTest {
             //do nothing, test passes
         }
     }
+
+    @Test
+    public void testWithdraw(){
+        BankAccount testAccount = new BankAccount();
+        testAccount.deposit(100);
+        testAccount.withdraw(20);
+        assertEquals(80, testAccount.getBalance(), 0.01);
+    }
+
 }

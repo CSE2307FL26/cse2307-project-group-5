@@ -19,7 +19,8 @@ public class MainMenu {
         System.out.println("Welcome to the 237 Bank App!");
         
         System.out.println("1. Make a deposit");
-        System.out.println("2. Exit the app");
+        System.out.println("2. Make a withdrawl");
+        System.out.println("3. Exit the app");
 
     }
 
@@ -36,6 +37,8 @@ public class MainMenu {
         switch (selection) {
             case 1:
                 performDeposit();
+            case 2:
+                performWithdrawl();
         }
     }
 
@@ -46,6 +49,15 @@ public class MainMenu {
             depositAmount = keyboardInput.nextInt();
         }
         userAccount.deposit(depositAmount);
+    }
+
+    public void performWithdrawl() {
+        double withdrawlAmount = -1;
+        while(withdrawlAmount < 0) {
+            System.out.print("How much would you like to withdraw: ");
+            withdrawlAmount = keyboardInput.nextInt();
+        }
+        userAccount.deposit(withdrawlAmount);
     }
 
     public void run() {
