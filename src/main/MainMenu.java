@@ -1,18 +1,22 @@
 package main;
 
 import java.util.Scanner;
+import java.util.ArrayList; 
 
 public class MainMenu {
 
     private static final int EXIT_SELECTION = 2;
 	private static final int MAX_SELECTION = 2;
 
-	private BankAccount userAccount;
+    private BankAccount userAccount;
+	private ArrayList<BankAccount> accounts;
     private Scanner keyboardInput;
 
     public MainMenu() {
         this.userAccount = new BankAccount();
         this.keyboardInput = new Scanner(System.in);
+        this.accounts = new ArrayList<>();
+        this.accounts.add(userAccount);
     }
 
     public void displayOptions() {
@@ -56,6 +60,16 @@ public class MainMenu {
             processInput(selection);
         }
     }
+
+    public void createAccount() {
+        accounts.add(new BankAccount());
+    }
+
+    public int getNumOfAccounts() {
+        return accounts.size();
+    }
+
+
 
     public static void main(String[] args) {
         MainMenu bankApp = new MainMenu();
