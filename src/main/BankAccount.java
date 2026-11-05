@@ -1,8 +1,12 @@
 package main;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BankAccount {
 
     private double balance;
+    private ArrayList<String> transactionHistory = new ArrayList<>();
     private boolean isOpen;
 
     public BankAccount() {
@@ -14,6 +18,7 @@ public class BankAccount {
         if(this.isOpen){
             if(amount > 0) {
                 this.balance += amount;
+                transactionHistory.add("Deposit: $" + amount);
             } else {
                 throw new IllegalArgumentException();
             }
@@ -28,8 +33,13 @@ public class BankAccount {
         if (this.isOpen){
             if(amount>0 && this.balance >= amount){
                 this.balance -= amount;
+                transactionHistory.add("Withdrawal: $" + amount);
             }
         }
+    }
+  
+    public List<String> getTransactionHistory() {
+      return new ArrayList<>(transactionHistory);
     }
 
     public void closeAccount(){
