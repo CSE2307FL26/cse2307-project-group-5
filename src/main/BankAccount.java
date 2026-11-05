@@ -7,17 +7,21 @@ public class BankAccount {
 
     private double balance;
     private ArrayList<String> transactionHistory = new ArrayList<>();
+    private boolean isOpen;
 
     public BankAccount() {
         this.balance = 0;
+        this.isOpen = true;
     }
 
     public void deposit(double amount) {
-        if(amount > 0) {
-            this.balance += amount;
-            transactionHistory.add("Deposit: $" + amount);
-        } else {
-            throw new IllegalArgumentException();
+        if(this.isOpen){
+            if(amount > 0) {
+                this.balance += amount;
+                transactionHistory.add("Deposit: $" + amount);
+            } else {
+                throw new IllegalArgumentException();
+            }
         }
     }
 
@@ -26,13 +30,28 @@ public class BankAccount {
     }
 
     public void withdraw(double amount){
-        if(amount > 0 && this.balance >= amount){
-            this.balance -= amount;
-            transactionHistory.add("Withdrawal: $" + amount);
+        if (this.isOpen){
+            if(amount>0 && this.balance >= amount){
+                this.balance -= amount;
+                transactionHistory.add("Withdrawal: $" + amount);
+            }
         }
     }
-
+  
     public List<String> getTransactionHistory() {
-        return new ArrayList<>(transactionHistory);
+      return new ArrayList<>(transactionHistory);
+    }
+
+    public void closeAccount(){
+        if (!this.isOpen){
+            return;
+        }
+
+        this.withdraw(this.balance);
+        this.isOpen = false;
+    }
+
+    public boolean isAccountOpen(){
+        return this.isOpen;
     }
 }
