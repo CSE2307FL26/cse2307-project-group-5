@@ -2,11 +2,12 @@ package main;
 
 import java.util.Scanner;
 import java.util.ArrayList; 
+import java.util.List;
 
 public class MainMenu {
 
-    private static final int EXIT_SELECTION = 2;
-	private static final int MAX_SELECTION = 2;
+    private static final int EXIT_SELECTION = 4;
+	private static final int MAX_SELECTION = 4;
 
     private BankAccount userAccount;
 	private ArrayList<BankAccount> accounts;
@@ -24,7 +25,8 @@ public class MainMenu {
         
         System.out.println("1. Make a deposit");
         System.out.println("2. Make a withdrawl");
-        System.out.println("3. Exit the app");
+        System.out.println("3. View Transaction History");
+        System.out.println("4. Exit the app");
 
     }
 
@@ -41,8 +43,15 @@ public class MainMenu {
         switch (selection) {
             case 1:
                 performDeposit();
+                break;
             case 2:
                 performWithdrawl();
+                break;
+            case 3:
+                viewTransactionHistory();
+                break;
+            case 4:
+                break;
         }
     }
 
@@ -61,7 +70,7 @@ public class MainMenu {
             System.out.print("How much would you like to withdraw: ");
             withdrawlAmount = keyboardInput.nextInt();
         }
-        userAccount.deposit(withdrawlAmount);
+        userAccount.withdraw(withdrawlAmount);
     }
 
     public void run() {
@@ -80,6 +89,21 @@ public class MainMenu {
     public int getNumOfAccounts() {
         return accounts.size();
     }
+ 
+    public void viewTransactionHistory() {
+        List<String> history = userAccount.getTransactionHistory();
+
+        if(history.isEmpty()) {
+            System.out.println("No transactions have occurred.");
+        } else {
+            System.out.println("Transaction History: ");
+            
+            for (int i = 0; i < history.size(); i++){
+                System.out.println(history.get(i));
+            }
+        }
+    }
+    
 
 
 
