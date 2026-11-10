@@ -2,6 +2,7 @@ package main;
 
 import java.util.Scanner;
 import java.util.ArrayList; 
+import java.util.List;
 
 public class MainMenu {
 
@@ -26,8 +27,12 @@ public class MainMenu {
         
         System.out.println("1. Make a deposit");
         System.out.println("2. Make a withdrawl");
+
         System.out.println("3. View account balances");
-        System.out.println("4. Exit the app");
+
+        System.out.println("4. View Transaction History");
+
+        System.out.println("5. Exit the app");
 
     }
 
@@ -44,10 +49,18 @@ public class MainMenu {
         switch (selection) {
             case 1:
                 performDeposit();
+                break;
             case 2:
                 performWithdrawl();
             case 3:
                 performViewAccountBalances();
+                break;
+            case 4:
+                viewTransactionHistory();
+                break;
+            case 5:
+                break;
+
         }
     }
 
@@ -103,6 +116,21 @@ public class MainMenu {
     public int getNumOfAccounts() {
         return accounts.size();
     }
+ 
+    public void viewTransactionHistory() {
+        List<String> history = userAccount.getTransactionHistory();
+
+        if(history.isEmpty()) {
+            System.out.println("No transactions have occurred.");
+        } else {
+            System.out.println("Transaction History: ");
+            
+            for (int i = 0; i < history.size(); i++){
+                System.out.println(history.get(i));
+            }
+        }
+    }
+    
 
 
 
