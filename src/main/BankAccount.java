@@ -3,9 +3,12 @@ package main;
 public class BankAccount {
 
     private double balance;
+    private int accountID;
+
 
     public BankAccount() {
         this.balance = 0;
+        this.accountID = 0;
     }
 
     public void deposit(double amount) {
@@ -24,5 +27,9 @@ public class BankAccount {
         if(amount>0 && this.balance >= amount){
             this.balance -= amount;
         }
+    }
+
+     public int getAccountID(){
+        return this.accountID;
     }
 }

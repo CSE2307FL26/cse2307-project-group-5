@@ -44,5 +44,16 @@ public class BankAccountTest {
         assertEquals(3, testMenu.getNumOfAccounts());
     }
 
+    @Test
+    public void checkBalanceForAnyAccount(){
+        BankAccount checkingAccount = new BankAccount();
+        BankAccount savingsAccount = new BankAccount();
+        checkingAccount.deposit(100);
+        savingsAccount.deposit(200);
+        assertEquals(100, checkingAccount.getBalance(), 0.01);
+        assertEquals(200, savingsAccount.getBalance(), 0.01);
+    }
+
+
     
 }
