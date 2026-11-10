@@ -30,7 +30,6 @@ public class BankAccountTest {
         }
     }
 
-<<<<<<< HEAD
     public void testCloseEmptyAccount() {
         BankAccount emptyAccount = new BankAccount();
         emptyAccount.closeAccount();
@@ -45,7 +44,6 @@ public class BankAccountTest {
     }
 
 
-=======
     @Test
     public void testWithdraw(){
         BankAccount testAccount = new BankAccount();
@@ -54,7 +52,6 @@ public class BankAccountTest {
         assertEquals(80, testAccount.getBalance(), 0.01);
     }
 
->>>>>>> ddc3e5f1f93e193ca487d409864ac085d885bb2f
     @Test 
     public void testCreateAdditionalAccount() {
         MainMenu testMenu = new MainMenu();
@@ -64,6 +61,15 @@ public class BankAccountTest {
     }
 
     @Test
+    public void checkBalanceForAnyAccount(){
+        BankAccount checkingAccount = new BankAccount();
+        BankAccount savingsAccount = new BankAccount();
+        checkingAccount.deposit(100);
+        savingsAccount.deposit(200);
+        assertEquals(100, checkingAccount.getBalance(), 0.01);
+        assertEquals(200, savingsAccount.getBalance(), 0.01);
+    }
+
     public void testEmptyTransactionHistory() {
         BankAccount testAccount = new BankAccount();
 

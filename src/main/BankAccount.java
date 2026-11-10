@@ -6,6 +6,12 @@ import java.util.List;
 public class BankAccount {
 
     private double balance;
+    private int accountID;
+
+
+    public BankAccount() {
+        this.balance = 0;
+        this.accountID = 0;
     private ArrayList<String> transactionHistory = new ArrayList<>();
     private boolean isOpen;
 
@@ -53,5 +59,9 @@ public class BankAccount {
 
     public boolean isAccountOpen(){
         return this.isOpen;
+    }
+
+     public int getAccountID(){
+        return this.accountID;
     }
 }
