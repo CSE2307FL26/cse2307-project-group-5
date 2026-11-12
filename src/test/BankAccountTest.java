@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
+import java.util.List;
 
 public class BankAccountTest {
 
@@ -32,8 +33,6 @@ public class BankAccountTest {
             //do nothing, test passes
         }
     }
-
-    
     
     @Test 
     public void testCreateAdditionalAccount() {
@@ -49,6 +48,7 @@ public class BankAccountTest {
 
         assertTrue(testAccount.isAccountOpen());
     }
+  
     @Test
     public void testCloseEmptyAccount() {
         BankAccount emptyAccount = new BankAccount();
@@ -215,4 +215,57 @@ public class BankAccountTest {
         assertEquals(0, targetAccount.getBalance(), 0.01);
     }    
    
+    @Test
+    public void checkBalanceForAnyAccount(){
+        BankAccount checkingAccount = new BankAccount();
+        BankAccount savingsAccount = new BankAccount();
+        checkingAccount.deposit(100);
+        savingsAccount.deposit(200);
+        assertEquals(100, checkingAccount.getBalance(), 0.01);
+        assertEquals(200, savingsAccount.getBalance(), 0.01);
+    }
+
+    public void testEmptyTransactionHistory() {
+        BankAccount testAccount = new BankAccount();
+
+        assertEquals(0, testAccount.getTransactionHistory().size());
+    }
+
+    @Test
+    public void testDepositHistory() {
+        BankAccount testAccount = new BankAccount();
+        testAccount.deposit(50);
+
+        List<String> history = testAccount.getTransactionHistory();
+
+        assertEquals(1, history.size());
+        assertEquals("Deposit: $50.0", history.get(0)); 
+    }
+
+    @Test 
+    public void testWithdrawalHistory() {
+        BankAccount testAccount = new BankAccount();
+        testAccount.deposit(100);
+        testAccount.withdraw(20);
+
+        List<String> history = testAccount.getTransactionHistory();
+
+        assertEquals(2, history.size());
+        assertEquals("Withdrawal: $20.0", history.get(1)); 
+    }
+
+    @Test 
+    public void testMultipleTransactions() {
+        BankAccount testAccount = new BankAccount();
+        testAccount.deposit(100);
+        testAccount.withdraw(20);
+        testAccount.deposit(50);
+
+        List<String> history = testAccount.getTransactionHistory();
+
+        assertEquals(3, history.size());
+        assertEquals("Deposit: $100.0", history.get(0)); 
+        assertEquals("Withdrawal: $20.0", history.get(1)); 
+        assertEquals("Deposit: $50.0", history.get(2)); 
+    }    
 }

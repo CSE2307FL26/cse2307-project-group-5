@@ -2,21 +2,24 @@ package main;
 
 import java.util.Scanner;
 import java.util.ArrayList; 
+import java.util.List;
 
 public class MainMenu {
 
-    private static final int EXIT_SELECTION = 2;
-	private static final int MAX_SELECTION = 2;
+    private static final int EXIT_SELECTION = 4;
+	private static final int MAX_SELECTION = 4;
 
     private BankAccount userAccount;
 	private ArrayList<BankAccount> accounts;
     private Scanner keyboardInput;
+    private Bank bank;
 
     public MainMenu() {
         this.userAccount = new BankAccount();
         this.keyboardInput = new Scanner(System.in);
         this.accounts = new ArrayList<>();
         this.accounts.add(userAccount);
+        this.bank = new Bank();
     }
 
     public void displayOptions() {
@@ -24,7 +27,12 @@ public class MainMenu {
         
         System.out.println("1. Make a deposit");
         System.out.println("2. Make a withdrawl");
-        System.out.println("3. Exit the app");
+
+        System.out.println("3. View account balances");
+
+        System.out.println("4. View Transaction History");
+
+        System.out.println("5. Exit the app");
 
     }
 
@@ -41,8 +49,18 @@ public class MainMenu {
         switch (selection) {
             case 1:
                 performDeposit();
+                break;
             case 2:
                 performWithdrawl();
+            case 3:
+                performViewAccountBalances();
+                break;
+            case 4:
+                viewTransactionHistory();
+                break;
+            case 5:
+                break;
+
         }
     }
 
@@ -61,8 +79,27 @@ public class MainMenu {
             System.out.print("How much would you like to withdraw: ");
             withdrawlAmount = keyboardInput.nextInt();
         }
-        userAccount.deposit(withdrawlAmount);
+        userAccount.withdraw(withdrawlAmount);
     }
+
+    public void performViewAccountBalances(){
+        if (getNumOfAccounts() == 0){
+            System.out.println("You do not currently have any accounts with us.");
+            return;
+        }
+
+        System.out.println("Which account would you like to access?");
+        for (int i = 0; i < getNumOfAccounts(); i++){
+            BankAccount currentAccount = accounts.get(i);
+            System.out.println((i+1) + ") Account " + currentAccount.getAccountID()+1);
+        }
+
+        int choice = keyboardInput.nextInt();
+
+        BankAccount accountSelected = accounts.get(choice-1);
+        System.out.println("Balance for account # " + accountSelected.getAccountID()+1 + ": $" + accountSelected.getBalance());
+    }
+
 
     public void run() {
         int selection = -1;
@@ -72,7 +109,6 @@ public class MainMenu {
             processInput(selection);
         }
     }
-
     public void createAccount() {
         accounts.add(new BankAccount());
     }
@@ -80,6 +116,21 @@ public class MainMenu {
     public int getNumOfAccounts() {
         return accounts.size();
     }
+ 
+    public void viewTransactionHistory() {
+        List<String> history = userAccount.getTransactionHistory();
+
+        if(history.isEmpty()) {
+            System.out.println("No transactions have occurred.");
+        } else {
+            System.out.println("Transaction History: ");
+            
+            for (int i = 0; i < history.size(); i++){
+                System.out.println(history.get(i));
+            }
+        }
+    }
+    
 
 
 
