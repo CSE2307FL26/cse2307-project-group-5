@@ -26,6 +26,7 @@ public class MainMenu {
         System.out.println("Welcome to the 237 Bank App!");
         
         System.out.println("1. Make a deposit");
+
         System.out.println("2. Make a withdrawl");
 
         System.out.println("3. View account balances");
@@ -52,6 +53,7 @@ public class MainMenu {
                 break;
             case 2:
                 performWithdrawl();
+                break;
             case 3:
                 performViewAccountBalances();
                 break;

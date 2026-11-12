@@ -7,17 +7,13 @@ public class BankAccount {
 
     private double balance;
     private int accountID;
-
-
-    public BankAccount() {
-        this.balance = 0;
-        this.accountID = 0;
     private ArrayList<String> transactionHistory = new ArrayList<>();
     private boolean isOpen;
 
     public BankAccount() {
         this.balance = 0;
         this.isOpen = true;
+        this.accountID = 0;
     }
 
     public void deposit(double amount) {

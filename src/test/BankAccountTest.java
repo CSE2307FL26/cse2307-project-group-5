@@ -30,17 +30,19 @@ public class BankAccountTest {
         }
     }
 
+    @Test
     public void testCloseEmptyAccount() {
         BankAccount emptyAccount = new BankAccount();
         emptyAccount.closeAccount();
-        assertFalse(isAccountOpen(emptyAccount));
+        assertFalse(emptyAccount.isAccountOpen());
     }
 
+    @Test
     public void testCloseNonEmptyAccount() {
         BankAccount testAccount = new BankAccount();
         testAccount.deposit(50);
         testAccount.closeAccount();
-        assertFalse(isAccountOpen(testAccount));
+        assertFalse(testAccount.isAccountOpen());
     }
 
 
