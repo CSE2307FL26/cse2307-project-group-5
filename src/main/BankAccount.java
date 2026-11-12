@@ -44,4 +44,19 @@ public class BankAccount {
     public boolean isAccountOpen(){
         return this.isOpen;
     }
+
+    public void transfer(BankAccount otherAccount, double amount){
+        if (this == otherAccount){
+            throw new IllegalArgumentException();
+        }
+        if (!this.isOpen || !otherAccount.isOpen){
+            throw new IllegalStateException();
+        }
+        if (amount <= 0 || amount > this.balance){
+            throw new IllegalArgumentException();
+        }
+
+        this.balance -= amount;
+        otherAccount.balance += amount;
+    }
 }
