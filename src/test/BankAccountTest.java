@@ -45,7 +45,6 @@ public class BankAccountTest {
     @Test 
     public void testNewAccountIsOpen(){
         BankAccount testAccount = new BankAccount();
-
         assertTrue(testAccount.isAccountOpen());
     }
   
@@ -54,7 +53,6 @@ public class BankAccountTest {
         BankAccount emptyAccount = new BankAccount();
 
         emptyAccount.closeAccount();
-
         assertFalse(emptyAccount.isAccountOpen());
     }
 
@@ -64,7 +62,6 @@ public class BankAccountTest {
 
         testAccount.deposit(50);
         testAccount.closeAccount();
-
         assertFalse(testAccount.isAccountOpen());
         assertEquals(0, testAccount.getBalance(), .01);
     }
