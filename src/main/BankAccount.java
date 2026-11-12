@@ -57,7 +57,22 @@ public class BankAccount {
         return this.isOpen;
     }
 
-     public int getAccountID(){
+    public void transfer(BankAccount otherAccount, double amount){
+        if (this == otherAccount){
+            throw new IllegalArgumentException();
+        }
+        if (!this.isOpen || !otherAccount.isOpen){
+            throw new IllegalStateException();
+        }
+        if (amount <= 0 || amount > this.balance){
+            throw new IllegalArgumentException();
+        }
+
+        this.balance -= amount;
+        otherAccount.balance += amount;
+    }
+     
+    public int getAccountID(){
         return this.accountID;
     }
 }
