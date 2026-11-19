@@ -9,6 +9,8 @@ public class BankAccount {
     private int accountID;
     private ArrayList<String> transactionHistory = new ArrayList<>();
     private boolean isOpen;
+    private double dailyLimit = 1000;
+    private double totalWithdrawnToday;
 
     public BankAccount() {
         this.balance = 0;
@@ -31,13 +33,24 @@ public class BankAccount {
         return this.balance;
     }
 
-    public void withdraw(double amount){
-        if (this.isOpen){
-            if(amount>0 && this.balance >= amount){
-                this.balance -= amount;
-                transactionHistory.add("Withdrawal: $" + amount);
-            }
+    public boolean withdraw(double amount){
+        if (!this.isOpen){
+            return false;
         }
+        if(amount<0 || this.balance <= amount){
+            return false;
+        }
+        if (this.totalWithdrawnToday + amount > dailyLimit){
+            return false;
+        }
+        this.balance -= amount;
+        this.totalWithdrawnToday += amount;
+        transactionHistory.add("Withdrawal: $" + amount);
+        return true;
+    }
+
+    public double getRemainingDailyLimit(){
+        return dailyLimit - this.totalWithdrawnToday;
     }
   
     public List<String> getTransactionHistory() {

@@ -27,8 +27,6 @@ public class MainMenu {
         System.out.println("Welcome to the 237 Bank App!");
         
         System.out.println("1. Make a deposit");
-        
-        System.out.println("2. Exit the app");
 
         System.out.println("2. Make a withdrawl");
 
@@ -84,7 +82,14 @@ public class MainMenu {
             System.out.print("How much would you like to withdraw: ");
             withdrawlAmount = keyboardInput.nextInt();
         }
-        userAccount.withdraw(withdrawlAmount);
+        if (userAccount.withdraw(withdrawlAmount)){
+            System.out.println("Withdrawl successful! New balance is: $" + userAccount.getBalance());
+        }
+        else{
+        System.out.println("Sorry! Withdrawl has failed! There could be a few reasons for this!");
+        System.out.println("1) Tried to withdrawn more than the current balance. Current balance is: $" + userAccount.getBalance());
+        System.out.println("2) Daily withdrawl limit has been reached/withdrawl amount is over the daily limit. Daily limit remaining: $" + userAccount.getRemainingDailyLimit());
+       }
     }
 
     public void performViewAccountBalances(){
