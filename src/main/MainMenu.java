@@ -1,6 +1,7 @@
 package main;
 
 import java.util.Scanner;
+
 import java.util.ArrayList; 
 import java.util.List;
 
@@ -26,6 +27,8 @@ public class MainMenu {
         System.out.println("Welcome to the 237 Bank App!");
         
         System.out.println("1. Make a deposit");
+        
+        System.out.println("2. Exit the app");
 
         System.out.println("2. Make a withdrawl");
 
